@@ -5,11 +5,11 @@ compatibility_date = "2025-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "proxy-db"
-database_id = "f14ba212-074c-44b9-9332-7450e6a4dc9a"
+database_id = "2e4c8bff-afcd-4bcb-9ef0-2ed042cf34fd"
 
 # 有 wrangler.toml 时，Pages 后台的「绑定」页面会变成只读，KV 只能在这里写。
 # 1) 先创建： npx wrangler kv namespace create BG_KV
 # 2) 把输出的 id 填到下面，去掉前面的 # ，然后重新部署。
 # [[kv_namespaces]]
 # binding = "KV"
-# id = "这里填 KV 的 id"
+# id = "ff2f593419214cfc93a498a07a70ac2e"
