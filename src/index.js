@@ -36,15 +36,16 @@ async function safeEq(a, b) {
 
 // 面板登录：必须显式配置，没有弱口令默认值
 async function webAuth(req, env) {
-  if (!env.WEB_USER || !env.WEB_PASS) return "unset";
+  const WU = (env.WEB_USER || "").trim(), WP = (env.WEB_PASS || "").trim();
+  if (!WU || !WP) return "unset";
   const h = req.headers.get("Authorization") || "";
   if (!h.startsWith("Basic ")) return false;
   let dec;
-  try { dec = atob(h.slice(6)); } catch { return false; }
+  try { dec = new TextDecoder().decode(Uint8Array.from(atob(h.slice(6)), (c) => c.charCodeAt(0))); } catch { return false; }
   const i = dec.indexOf(":");
   if (i < 0) return false;
-  const okU = await safeEq(dec.slice(0, i), env.WEB_USER);
-  const okP = await safeEq(dec.slice(i + 1), env.WEB_PASS);
+  const okU = await safeEq(dec.slice(0, i), WU);
+  const okP = await safeEq(dec.slice(i + 1), WP);
   return okU && okP;
 }
 
@@ -52,7 +53,7 @@ async function agentAuth(req, env) {
   if (!env.AGENT_TOKEN) return false;
   const h = req.headers.get("Authorization") || "";
   if (!h.startsWith("Bearer ")) return false;
-  return safeEq(h.slice(7), env.AGENT_TOKEN);
+  return safeEq(h.slice(7), env.AGENT_TOKEN.trim());
 }
 
 // ---------- D1 ----------
