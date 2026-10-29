@@ -1,0 +1,13 @@
+{
+  "name": "resi-proxy-hub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:assets": "node scripts/build-assets.mjs",
+    "dev": "npm run build:assets && wrangler pages dev public",
+    "deploy": "npm run build:assets && wrangler pages deploy public --project-name free-ip-hub"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

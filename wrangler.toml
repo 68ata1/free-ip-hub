@@ -1,0 +1,15 @@
+name = "free-ip-hub"
+pages_build_output_dir = "public"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "proxy-db"
+database_id = "f14ba212-074c-44b9-9332-7450e6a4dc9a"   # 沿用原来的 D1，数据不会丢
+
+# 壁纸跨设备同步（可选）。Pages 不会自动创建 KV：
+#   npx wrangler kv namespace create BG_KV
+# 把输出的 id 填到下面并取消注释；不需要壁纸同步就保持注释。
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "填入 KV namespace id"
